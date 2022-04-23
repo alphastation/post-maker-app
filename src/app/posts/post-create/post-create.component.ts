@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Post } from '../post.model';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-create',
@@ -13,18 +14,23 @@ export class PostCreateComponent {
   // enteredValue = '';
   contentEntered = '';
   titleEntered = '';
-  @Output() postCreatedEvent = new EventEmitter<Post>();
+  // @Output() postCreatedEvent = new EventEmitter<Post>();
   // postInput: HTMLTextAreaElement
-
+  constructor(public postsService: PostsService) {
+    // this.postsService = postsService;
+  }
   onCreatingPost(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    const post: Post = {
-      title: form.value.title,
-      content: form.value.content,
-    };
-    this.postCreatedEvent.emit(post);
+
+    this.postsService.addPost(form.value.title, form.value.content); //instead of emmiting
+    form.resetForm();
+    // const post: Post = {
+    //   title: form.value.title,
+    //   content: form.value.content,
+    // };
+    // this.postCreatedEvent.emit(post);
     // alert('Post is just added');
     // console.log(postInput);
     // console.dir(postInput);
