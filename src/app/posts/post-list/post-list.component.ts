@@ -1,5 +1,7 @@
 import { Component, Input, EventEmitter } from '@angular/core';
 import { Post } from '../post.model';
+import { PostsService } from '../posts.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-list',
@@ -7,19 +9,15 @@ import { Post } from '../post.model';
   styleUrls: ['./post-list.component.css'],
 })
 export class PostListComponent {
-  @Input() posts: Post[] = [];
   // posts = [
-  //   {
-  //     title: 'This my dummy first post',
-  //     content: 'This is my dummy forst post content',
-  //   },
-  //   {
-  //     title: 'This my dummy second post',
-  //     content: 'This is my dummy second post content',
-  //   },
-  //   {
-  //     title: 'This my dummy third post',
-  //     content: 'This is my dummy third   post content',
-  //   },
+  //   { title: "First Post", content: "This is the first post's content" },
+  //   { title: "Second Post", content: "This is the second post's content" },
+  //   { title: "Third Post", content: "This is the third post's content" }
   // ];
+  @Input() posts: Post[] = [];
+  // private postsSub: Subscription;
+  // postsService: PostsService;
+  constructor(public postsService: PostsService) {
+    // this.postsService = postsService;
+  }
 }
