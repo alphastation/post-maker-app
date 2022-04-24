@@ -28,10 +28,12 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false
 
   }
 }
 // "strictPropertyInitialization": false - this was added
 
-// "noImplicitReturns": true, this was canged fron true to false
+// "noImplicitReturns": true, this was changed fron true to false
+// "noImplicitAny": false - was added
