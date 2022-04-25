@@ -16,7 +16,7 @@ export class PostCreateComponent implements OnInit {
   titleEntered = '';
   private mode = 'create';
   private postId: string;
-  private post: Post;
+  public post: Post;
   // @Output() postCreatedEvent = new EventEmitter<Post>();
   // postInput: HTMLTextAreaElement
   constructor(public postsService: PostsService, public route: ActivatedRoute) {
@@ -35,13 +35,21 @@ export class PostCreateComponent implements OnInit {
       }
     });
   }
-  onCreatingPost(form: NgForm) {
+  onAddingOrUpdatingPost(form: NgForm) {
     if (form.invalid) {
       return;
     }
-
-    this.postsService.addPost(form.value.title, form.value.content); //instead of emmiting
+    if (this.mode === 'create') {
+      this.postsService.addPost(form.value.title, form.value.content); //instead of emmiting
+    } else {
+      this.postsService.updatePost(
+        this.postId,
+        form.value.title,
+        form.value.content
+      );
+    }
     form.resetForm();
+
     // const post: Post = {
     //   title: form.value.title,
     //   content: form.value.content,
