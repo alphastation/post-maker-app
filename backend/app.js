@@ -1,14 +1,16 @@
 const path = require("path");
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-require('./models/post.js')
+const postsRoutes = require("./routes/posts");
+const app = express();
+// require('./models/post.js')
 // const Post = require('./models/post.js')
 
-const postsRoutes = require("./routes/posts");
 
-const app = express();
+
+
+
 const dbName = 'posts';
 const connectionString = `mongodb://localhost:27017/${dbName}`;
 mongoose.connect(connectionString, {
