@@ -11,6 +11,10 @@ mat-spinner {
   margin: auto;
 }
 
+mat-paginator {
+  margin-top: 1.5rem;
+}
+
 .post-image {
   width: 60%;
   object-fit: cover;

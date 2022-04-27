@@ -58,19 +58,16 @@ router.post('', multer({ storage: storage }).single("image"), (req, res, next) =
 });
 
 router.get('', (req, res, next) => {
-  // const posts = [
-  //   {
-  //     id: "fadf12421l",
-  //     title: "First server-side post",
-  //     content: "This is coming from the server"
-  //   },
-  //   {
-  //     id: "ksajflaj132",
-  //     title: "Second server-side post",
-  //     content: "This is coming from the server!"
-  //   }
-  // ];
-  Post.find().then((documents) => {
+  console.log(req.query)
+  const pageSize = Number(req.query.pageSize);
+  const currentPage = Number(req.query.page);
+  const postQuery = Post.find();
+  if (pageSize && currentPage) {
+    postQuery
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize);
+  }
+  postQuery.then((documents) => {
     // console.log(documents)
     res.status(200).json({
       message: "Posts fetched successfully!",
